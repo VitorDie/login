@@ -2,6 +2,7 @@ package br.edu.fesa.teladelogin;
 
 import database.UserDB;
 import database.UserMapDB;
+import database.UserMySqlDB;
 import database.dataModel.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,12 +25,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
-    UserMapDB database = UserMapDB.getInstance();
+    UserMySqlDB database = new UserMySqlDB();
 
     public LoginController() {
-        database.create(1, new User("", "", "root", "toor"));
-        database.create(2, new User("", "", "jose", "jose"));
-        database.create(3, new User("", "", "maria", "maria"));
     }
 
     @FXML

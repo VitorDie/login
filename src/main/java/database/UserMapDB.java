@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class UserMapDB implements UserDB {
-    protected UserMapDB() {}
+    protected UserMapDB() {
+    }
     static UserMapDB instance = null;
     private static Integer validId = 0;
 
@@ -16,6 +17,9 @@ public class UserMapDB implements UserDB {
         if (instance == null)
         {
             instance = new UserMapDB();
+            instance.create(1, new User("", "", "root", "root"));
+            instance.create(2, new User("", "", "jose", "jose"));
+            instance.create(3, new User("", "", "maria", "maria"));
         }
         return instance;
     }

@@ -1,5 +1,8 @@
 package br.edu.fesa.teladelogin;
 
+import database.UserDB;
+import database.UserMapDB;
+import database.dataModel.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +22,7 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class RegisterController implements Initializable {
+    UserMapDB database = UserMapDB.getInstance();
 
     @FXML
     private ImageView shieldImageView;
@@ -27,11 +31,18 @@ public class RegisterController implements Initializable {
     @FXML
     private Label registrationMessageLabel;
     @FXML
+    private Label confirmPasswordLabel;
+
+    @FXML
+    private TextField firstnameTextField;
+    @FXML
+    private TextField lastnameTextField;
+    @FXML
+    private TextField usernameTextField;
+    @FXML
     private PasswordField setPasswordField;
     @FXML
     private PasswordField confirmPasswordField;
-    @FXML
-    private Label confirmPasswordLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -41,9 +52,7 @@ public class RegisterController implements Initializable {
     }
 
     public void registerButtonOnAction(ActionEvent event) {
-        //registrationMessageLabel.setText("User has been registered successfully!");
         if(setPasswordField.getText().equals(confirmPasswordField.getText())) {
-//            confirmPasswordLabel.setText("You are set");
             registerUser();
             registrationMessageLabel.setText("User has been registered successfully!");
         } else {
@@ -54,11 +63,13 @@ public class RegisterController implements Initializable {
     public void closeButtonOnAction(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
-        Platform.exit();
+//        Platform.exit();
     }
 
     public void registerUser() {
-        // metodo para inserir o novo usuario
+        User user = new User(firstnameTextField.getText(), lastnameTextField.getText(),
+                usernameTextField.getText(), setPasswordField.getText());
+        database.create(database.getValidId(), user);
     }
 
 }

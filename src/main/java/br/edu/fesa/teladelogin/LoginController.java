@@ -1,5 +1,8 @@
 package br.edu.fesa.teladelogin;
 
+import database.UserDB;
+import database.UserMapDB;
+import database.dataModel.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,9 +19,19 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+    UserMapDB database = UserMapDB.getInstance();
+
+    public LoginController() {
+        database.create(1, new User("", "", "root", "toor"));
+        database.create(2, new User("", "", "jose", "jose"));
+        database.create(3, new User("", "", "maria", "maria"));
+    }
+
     @FXML
     private Button cancelButton;
     @FXML
@@ -54,7 +67,17 @@ public class LoginController implements Initializable {
         String username = usernameTextField.getText();
         String password = enterPasswordField.getText();
 
-        if (username.equals("root") && password.equals("toor"))
+
+        boolean status = false;
+        ArrayList<User> lista = database.read();
+        for (User user : lista){
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+               status = true;
+               break;
+            }
+        }
+
+        if (status)
             loginMessageLabel.setText("Congrats");
         else {
             //loginMessageLabel.setText("Invalid Login pleas try again");

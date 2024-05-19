@@ -1,5 +1,6 @@
 package br.edu.fesa.teladelogin;
 
+import database.UserMySqlDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

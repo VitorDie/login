@@ -18,9 +18,16 @@ public class ConexaoMySql {
     }
 
     public static Connection getInstance() throws SQLException {
+        /*
         String dbUrl = "jdbc:mysql://localhost:3306/LoginDB";
         String user = "vitordie";
         String password = "Lp53688!";
+
+         */
+
+        String dbUrl = "jdbc:mysql://salao.mysql.database.azure.com:3306/LoginDB";
+        String user = "salao_db";
+        String password = "Fesa@123";
 
         if (instance == null)
         {

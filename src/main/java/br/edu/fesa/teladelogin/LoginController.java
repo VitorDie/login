@@ -62,13 +62,14 @@ public class LoginController implements Initializable {
     }
 
     public void validateLogin() {
-        String username = usernameTextField.getText();
-        String password = enterPasswordField.getText();
-
+        String username = usernameTextField.getText(); // talvez validar com regex aqui
+        String password = Encriptador.encriptar(enterPasswordField.getText());
+        loginMessageLabel.setText(password); // me apague
 
         boolean status = false;
         ArrayList<User> lista = database.read();
         for (User user : lista){
+            System.out.println(user.getUsername() + " " +user.getPassword()); // me apague
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                status = true;
                break;
@@ -78,7 +79,6 @@ public class LoginController implements Initializable {
         if (status)
             loginMessageLabel.setText("Congrats");
         else {
-            //loginMessageLabel.setText("Invalid Login pleas try again");
             createAccountForm();
         }
     }

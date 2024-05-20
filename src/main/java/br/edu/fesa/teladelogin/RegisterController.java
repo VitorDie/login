@@ -1,9 +1,7 @@
 package br.edu.fesa.teladelogin;
 
-import database.UserDB;
-import database.UserMapDB;
+import database.UserMySqlDB;
 import database.dataModel.User;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,12 +15,12 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterController implements Initializable {
-    UserMapDB database = UserMapDB.getInstance();
+    UserMySqlDB database = new UserMySqlDB();
 
     @FXML
     private ImageView shieldImageView;
@@ -52,6 +50,19 @@ public class RegisterController implements Initializable {
     }
 
     public void registerButtonOnAction(ActionEvent event) {
+        registrationMessageLabel.setText("");
+        confirmPasswordLabel.setText("");
+
+        if (!isEmailValid(usernameTextField.getText())) {
+            registrationMessageLabel.setText("Isso não é um email válido");
+            return;
+        }
+
+        if(!isPasswordMedium(setPasswordField.getText())) {
+            confirmPasswordLabel.setText("A senha deve ter Pelo menos 8 caracteres, uma Letra maiúscula e número");
+            return;
+        }
+
         if(setPasswordField.getText().equals(confirmPasswordField.getText())) {
             registerUser();
             registrationMessageLabel.setText("User has been registered successfully!");
@@ -70,6 +81,38 @@ public class RegisterController implements Initializable {
         User user = new User(firstnameTextField.getText(), lastnameTextField.getText(),
                 usernameTextField.getText(), setPasswordField.getText());
         database.create(database.getValidId(), user);
+    }
+
+    private boolean isPasswordStrong(String password) {
+        String strongPasswordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$\n";
+
+        Pattern strongPasswordPattern = Pattern.compile(strongPasswordRegex);
+
+        Matcher strongPasswordMatcher = strongPasswordPattern.matcher(password);
+
+        return strongPasswordMatcher.matches();
+    }
+
+    private boolean isPasswordMedium(String password) {
+        String mediumPasswordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
+
+        Pattern mediumPasswordPattern = Pattern.compile(mediumPasswordRegex);
+
+        Matcher mediumPasswordMatcher = mediumPasswordPattern.matcher(password);
+
+        return mediumPasswordMatcher.matches();
+    }
+
+    private boolean isEmailValid(String email) {
+        String regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+        Pattern emailPattern = Pattern.compile(regex);
+
+        Matcher matcher = emailPattern.matcher(email);
+
+        return matcher.matches();
+
     }
 
 }

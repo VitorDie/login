@@ -19,4 +19,17 @@ module br.edu.fesa.teladelogin {
 
     opens br.edu.fesa.teladelogin to javafx.fxml;
     exports br.edu.fesa.teladelogin;
+
+    exports salaoDataOutput;
+    exports salaoDataOutput.mapDB;
+
+    exports salaoDataProcess.modeloDeDados;
+
+    exports salaoDataProcess.transactions;
+    exports salaoDataProcess.transactions.atendimentoTransactions;
+    exports salaoDataProcess.transactions.clienteTransactions;
+    exports salaoDataProcess.transactions.comandaTransactions;
+    exports salaoDataProcess.transactions.pagamentoTransactions;
+    exports salaoDataProcess.transactions.profissionalTransactions;
+    exports salaoDataProcess.transactions.servicoTransactions;
 }

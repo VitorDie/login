@@ -15,6 +15,7 @@ module br.edu.fesa.teladelogin {
     requires com.almasb.fxgl.all;
     requires java.desktop;
     requires junit;
+    requires fontawesomefx;
 
     opens br.edu.fesa.teladelogin to javafx.fxml;
     exports br.edu.fesa.teladelogin;

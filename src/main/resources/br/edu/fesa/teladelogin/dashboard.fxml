@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.fesa.teladelogin.DashboardController">
+   <children>
+      <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <BorderPane layoutX="115.0" layoutY="132.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="44.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="37.0" layoutY="-78.0" prefHeight="40.0" prefWidth="1100.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Button fx:id="close" mnemonicParsing="false" onAction="#close" prefHeight="24.0" prefWidth="49.0" text="x" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+                                 <graphic>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="minimize" layoutX="992.0" layoutY="2.0" mnemonicParsing="false" onAction="#minimize" prefHeight="24.0" prefWidth="49.0" text="-">
+                                 <graphic>
+                                 </graphic>
+                              </Button>
+                              <Label layoutX="45.0" layoutY="12.0" prefHeight="16.0" prefWidth="196.0" text="Projeto Interdisciplinar EC6" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane prefHeight="556.0" prefWidth="216.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="8.0" layoutY="64.0" prefHeight="556.0" prefWidth="216.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ImageView fx:id="welcome_imageView" fitHeight="559.0" fitWidth="217.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../../../../../../images/imagemRegistro.jpg" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="dashboard_btn" layoutX="18.0" layoutY="133.0" mnemonicParsing="false" onAction="#showDashboard" prefHeight="35.0" prefWidth="180.0" text="Dashboard" />
+                              <Button fx:id="agenda_btn" layoutX="18.0" layoutY="186.0" mnemonicParsing="false" onAction="#showAgenda" prefHeight="35.0" prefWidth="180.0" text="Agenda" />
+                              <Button fx:id="funcionarios_btn" layoutX="18.0" layoutY="243.0" mnemonicParsing="false" onAction="#showFuncionarios" prefHeight="35.0" prefWidth="180.0" text="Funcionarios" />
+                              <Label layoutX="78.0" layoutY="89.0" text="Welcome" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane fx:id="dashboard_form" layoutX="216.0" layoutY="180.0" prefHeight="559.0" prefWidth="883.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="14.0" layoutY="27.0" prefHeight="171.0" prefWidth="867.0">
+                                 <children>
+                                    <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="143.0" prefWidth="256.0">
+                                       <children>
+                                          <ImageView fx:id="dashboard_qtdFuncionarios_imageView" fitHeight="150.0" fitWidth="257.0" pickOnBounds="true">
+                                             <image>
+                                                <Image url="@../../../../../../../images/imagemRegistro.jpg" />
+                                             </image>
+                                          </ImageView>
+                                          <Label fx:id="dashboard_qtdFuncionarios" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="97.0" layoutY="30.0" prefHeight="16.0" prefWidth="118.0" text="0" />
+                                          <Label layoutX="115.0" layoutY="103.0" text="Funcionarios" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="305.0" layoutY="14.0" prefHeight="143.0" prefWidth="256.0">
+                                       <children>
+                                          <ImageView fx:id="dashboard_qtdClientes_imageView" fitHeight="150.0" fitWidth="257.0" pickOnBounds="true">
+                                             <image>
+                                                <Image url="@../../../../../../../images/imagemRegistro.jpg" />
+                                             </image>
+                                          </ImageView>
+                                          <Label fx:id="dashboard_qtdClientes" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="97.0" layoutY="30.0" prefHeight="16.0" prefWidth="118.0" text="0" />
+                                          <Label layoutX="115.0" layoutY="103.0" text="Clientes" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="596.0" layoutY="14.0" prefHeight="143.0" prefWidth="256.0">
+                                       <children>
+                                          <ImageView fx:id="dashboard_receita_imgView" fitHeight="150.0" fitWidth="257.0" pickOnBounds="true">
+                                             <image>
+                                                <Image url="@../../../../../../../images/imagemRegistro.jpg" />
+                                             </image>
+                                          </ImageView>
+                                          <Label fx:id="dashboard_receita" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="97.0" layoutY="30.0" prefHeight="16.0" prefWidth="118.0" text="\$0,0" />
+                                          <Label layoutX="97.0" layoutY="103.0" text="Receita" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="14.0" layoutY="221.0" prefHeight="331.0" prefWidth="867.0">
+                                 <children>
+                                    <AreaChart fx:id="dashboard_incomeChart" layoutX="120.0" layoutY="46.0" prefHeight="285.0" prefWidth="867.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </AreaChart>
+                                    <Label layoutX="372.0" layoutY="14.0" text="Income Data Chart" />
+                                 </children>
+                              </AnchorPane>
+                              <Separator layoutX="57.0" layoutY="204.0" prefHeight="7.0" prefWidth="757.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="agenda_form" prefHeight="559.0" prefWidth="883.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="535.0" prefWidth="306.0">
+                                 <children>
+                                    <ImageView fx:id="agenda_imageView" fitHeight="536.0" fitWidth="307.0" pickOnBounds="true" smooth="false">
+                                       <image>
+                                          <Image url="@../../../../../../../images/imagemRegistro.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="26.0" layoutY="63.0" text="Data" />
+                                    <DatePicker fx:id="agenda_data" layoutX="95.0" layoutY="59.0" />
+                                    <Label layoutX="24.0" layoutY="100.0" text="Cliente" />
+                                    <TextField fx:id="agenda_cliente" layoutX="95.0" layoutY="96.0" />
+                                    <Label layoutX="10.0" layoutY="138.0" text="Profissional" />
+                                    <Label layoutX="18.0" layoutY="174.0" text="Servico" />
+                                    <Label layoutX="5.0" layoutY="206.0" text="Pagamento" />
+                                    <TextField fx:id="agenda_profissional" layoutX="95.0" layoutY="134.0" />
+                                    <TextField fx:id="agenda_servico" layoutX="95.0" layoutY="170.0" />
+                                    <TextField fx:id="agenda_pagamento" layoutX="95.0" layoutY="210.0" />
+                                    <Button fx:id="agenda_addBtn" layoutX="26.0" layoutY="305.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="95.0" text="Add" />
+                                    <Button fx:id="agenda_updateBtn" layoutX="153.0" layoutY="305.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="95.0" text="Update" />
+                                    <Button fx:id="agenda_resetBtn" layoutX="26.0" layoutY="424.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="95.0" text="Reset" />
+                                    <Button fx:id="agenda_deleteBtn" layoutX="153.0" layoutY="424.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="95.0" text="Delete" />
+                                    <Label layoutX="26.0" layoutY="254.0" text="Valor" />
+                                    <TextField fx:id="agenda_valor" layoutX="95.0" layoutY="250.0" />
+                                    <Label layoutX="26.0" layoutY="31.0" text="Id" />
+                                    <TextField fx:id="agenda_id" layoutX="97.0" layoutY="27.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="342.0" layoutY="14.0" prefHeight="538.0" prefWidth="537.0">
+                                 <children>
+                                    <ImageView fx:id="agenda_imageView2" fitHeight="535.0" fitWidth="537.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../../../../../../../images/imagemRegistro.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <TableView fx:id="agenda_tableView" layoutX="14.0" layoutY="14.0" prefHeight="518.0" prefWidth="516.0">
+                                      <columns>
+                                        <TableColumn fx:id="agenda_col_id" prefWidth="40.0" text="Id" />
+                                        <TableColumn fx:id="agenda_col_data" prefWidth="68.0" text="Data" />
+                                          <TableColumn fx:id="agenda_col_cliente" prefWidth="85.0" text="Cliente" />
+                                          <TableColumn fx:id="agenda_col_profissional" prefWidth="99.0" text="Profissional" />
+                                          <TableColumn fx:id="agenda_col_servico" prefWidth="99.0" text="Servico" />
+                                          <TableColumn fx:id="agenda_col_pagamento" prefWidth="124.0" text="Pagamento" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                              <Separator layoutX="327.0" layoutY="18.0" orientation="VERTICAL" prefHeight="533.0" prefWidth="8.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="funcionarios_form" prefHeight="559.0" prefWidth="883.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="189.0" prefWidth="863.0">
+                                 <children>
+                                    <ImageView fx:id="funcionarios_imageView" fitHeight="189.0" fitWidth="862.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../../../../../../../images/imagemRegistro.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="27.0" layoutY="28.0" text="Id" />
+                                    <TextField fx:id="fucnionarios_id" layoutX="70.0" layoutY="24.0" />
+                                    <Button fx:id="funcionarios_addBtn" layoutX="14.0" layoutY="95.0" mnemonicParsing="false" text="Add" />
+                                    <Button fx:id="funcionarios_clearBtn" layoutX="70.0" layoutY="95.0" mnemonicParsing="false" text="Clear" />
+                                    <Button fx:id="funcionarios_updateBtn" layoutX="135.0" layoutY="95.0" mnemonicParsing="false" text="Update" />
+                                    <Button fx:id="funcionarios_deleteBtn" layoutX="211.0" layoutY="95.0" mnemonicParsing="false" text="Delete" />
+                                    <Label layoutX="14.0" layoutY="63.0" text="Nome" />
+                                    <TextField fx:id="funcionarios_nome" layoutX="70.0" layoutY="59.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="14.0" layoutY="224.0" prefHeight="324.0" prefWidth="861.0">
+                                 <children>
+                                    <ImageView fx:id="funcionarios_imageView1" fitHeight="326.0" fitWidth="861.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../../../../../../../images/imagemRegistro.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <TableView fx:id="funcionarios_tableView" layoutX="14.0" layoutY="14.0" prefHeight="303.0" prefWidth="838.0">
+                                      <columns>
+                                        <TableColumn fx:id="funcionarios_col_id" prefWidth="75.0" text="id" />
+                                        <TableColumn fx:id="funcionarios_col_nome" prefWidth="75.0" text="nome" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                              <Separator layoutX="18.0" layoutY="212.0" prefHeight="0.0" prefWidth="855.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

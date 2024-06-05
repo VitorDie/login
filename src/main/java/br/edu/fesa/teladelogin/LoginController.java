@@ -76,14 +76,32 @@ public class LoginController implements Initializable {
             }
         }
 
-        if (status)
+        if (status) {
             loginMessageLabel.setText("Congrats");
+            dashboardForm();
+        }
         else {
             createAccountForm();
         }
     }
 
-    public void createAccountForm() {
+    private void dashboardForm() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
+
+            Stage registerStage = new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            Scene scene = new Scene(fxmlLoader.load(), 1100, 600);
+            registerStage.setScene(scene);
+            registerStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+    private void createAccountForm() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register.fxml"));
 

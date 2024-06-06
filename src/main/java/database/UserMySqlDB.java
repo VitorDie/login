@@ -2,19 +2,16 @@ package database;
 
 import br.edu.fesa.teladelogin.Encriptador;
 import database.dataModel.User;
-import org.junit.Test;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class UserMySqlDB implements UserDB {
-    private static Connection connection;
+    public static Connection connection;
 
     static {
         try {
-            connection = ConexaoMySql.getInstance();
+            connection = ConexaoMySql.getLoginDBInstance();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -8,8 +8,9 @@ public class ConexaoMySql {
     private ConexaoMySql() {
     }
 
-    private static Connection instance = null;
+    private static Connection loginDBInstance = null;
 
+    private static Connection agendaDBInstance = null;
 
     private static Connection getConnection(String dbUrl, String user, String password) throws SQLException {
         Connection connection = DriverManager.getConnection(dbUrl, user, password);
@@ -17,23 +18,28 @@ public class ConexaoMySql {
         return connection;
     }
 
-    public static Connection getInstance() throws SQLException {
-        /*
-        String dbUrl = "jdbc:mysql://localhost:3306/LoginDB";
-        String user = "vitordie";
-        String password = "Lp53688!";
-
-         */
-
+    public static Connection getLoginDBInstance() throws SQLException {
         String dbUrl = "jdbc:mysql://salao.mysql.database.azure.com:3306/LoginDB";
         String user = "salao_db";
         String password = "Fesa@123";
 
-        if (instance == null)
+        if (loginDBInstance == null)
         {
-            instance = getConnection(dbUrl, user, password);
+            loginDBInstance = getConnection(dbUrl, user, password);
         }
 
-        return instance;
+        return loginDBInstance;
+    }
+
+    public static Connection getAgendaDBInstance() throws SQLException {
+        String dbUrl = "jdbc:mysql://salao.mysql.database.azure.com:3306/SalaoDB";
+        String user = "salao_db";
+        String password = "Fesa@123";
+
+        if (agendaDBInstance == null)
+        {
+            agendaDBInstance = getConnection(dbUrl, user, password);
+        }
+        return agendaDBInstance;
     }
 }

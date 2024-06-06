@@ -1,8 +1,10 @@
 package salaoDataOutput.mapDB;
 
+import database.dataModel.User;
 import salaoDataOutput.ProfissionalDB;
 import salaoDataProcess.modeloDeDados.Profissional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,5 +29,14 @@ public class ProfissionalMapDB implements ProfissionalDB {
     @Override
     public void delete(Integer id) {
         db.remove(id);
+    }
+
+    public ArrayList<Profissional> read() {
+        ArrayList<Profissional> lista = new ArrayList<>();
+        for (Integer key : db.keySet())
+        {
+            lista.add(db.get(key));
+        }
+        return lista;
     }
 }

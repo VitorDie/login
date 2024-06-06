@@ -62,7 +62,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="dashboard_form" layoutX="216.0" layoutY="180.0" prefHeight="559.0" prefWidth="883.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="dashboard_form" layoutX="216.0" layoutY="180.0" prefHeight="559.0" prefWidth="883.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="27.0" prefHeight="171.0" prefWidth="867.0">
                                  <children>
@@ -117,7 +117,7 @@
                               <Separator layoutX="57.0" layoutY="204.0" prefHeight="7.0" prefWidth="757.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="agenda_form" prefHeight="559.0" prefWidth="883.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="agenda_form" prefHeight="559.0" prefWidth="883.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="535.0" prefWidth="306.0">
                                  <children>
@@ -136,10 +136,10 @@
                                     <TextField fx:id="agenda_profissional" layoutX="95.0" layoutY="134.0" />
                                     <TextField fx:id="agenda_servico" layoutX="95.0" layoutY="170.0" />
                                     <TextField fx:id="agenda_pagamento" layoutX="95.0" layoutY="210.0" />
-                                    <Button fx:id="agenda_addBtn" layoutX="26.0" layoutY="305.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="95.0" text="Add" />
-                                    <Button fx:id="agenda_updateBtn" layoutX="153.0" layoutY="305.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="95.0" text="Update" />
-                                    <Button fx:id="agenda_resetBtn" layoutX="26.0" layoutY="424.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="95.0" text="Reset" />
-                                    <Button fx:id="agenda_deleteBtn" layoutX="153.0" layoutY="424.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="95.0" text="Delete" />
+                                    <Button fx:id="agenda_addBtn" layoutX="26.0" layoutY="305.0" mnemonicParsing="false" onAction="#criarComanda" prefHeight="79.0" prefWidth="95.0" text="Add" />
+                                    <Button fx:id="agenda_updateBtn" layoutX="153.0" layoutY="305.0" mnemonicParsing="false" onAction="#alterarComanda" prefHeight="79.0" prefWidth="95.0" text="Update" />
+                                    <Button fx:id="agenda_resetBtn" layoutX="26.0" layoutY="424.0" mnemonicParsing="false" onAction="#listarComandas" prefHeight="79.0" prefWidth="95.0" text="Reset" />
+                                    <Button fx:id="agenda_deleteBtn" layoutX="153.0" layoutY="424.0" mnemonicParsing="false" onAction="#excluirComanda" prefHeight="79.0" prefWidth="95.0" text="Delete" />
                                     <Label layoutX="26.0" layoutY="254.0" text="Valor" />
                                     <TextField fx:id="agenda_valor" layoutX="95.0" layoutY="250.0" />
                                     <Label layoutX="26.0" layoutY="31.0" text="Id" />
@@ -179,10 +179,10 @@
                                     </ImageView>
                                     <Label layoutX="27.0" layoutY="28.0" text="Id" />
                                     <TextField fx:id="fucnionarios_id" layoutX="70.0" layoutY="24.0" />
-                                    <Button fx:id="funcionarios_addBtn" layoutX="14.0" layoutY="95.0" mnemonicParsing="false" text="Add" />
-                                    <Button fx:id="funcionarios_clearBtn" layoutX="70.0" layoutY="95.0" mnemonicParsing="false" text="Clear" />
-                                    <Button fx:id="funcionarios_updateBtn" layoutX="135.0" layoutY="95.0" mnemonicParsing="false" text="Update" />
-                                    <Button fx:id="funcionarios_deleteBtn" layoutX="211.0" layoutY="95.0" mnemonicParsing="false" text="Delete" />
+                                    <Button fx:id="funcionarios_addBtn" layoutX="14.0" layoutY="95.0" mnemonicParsing="false" onAction="#adicionarFuncionario" text="Add" />
+                                    <Button fx:id="funcionarios_clearBtn" layoutX="70.0" layoutY="95.0" mnemonicParsing="false" onAction="#clearFuncionario" text="Clear" />
+                                    <Button fx:id="funcionarios_updateBtn" layoutX="135.0" layoutY="95.0" mnemonicParsing="false" onAction="#atualizarFuncionario" text="Update" />
+                                    <Button fx:id="funcionarios_deleteBtn" layoutX="211.0" layoutY="95.0" mnemonicParsing="false" onAction="#deletarFuncionario" text="Delete" />
                                     <Label layoutX="14.0" layoutY="63.0" text="Nome" />
                                     <TextField fx:id="funcionarios_nome" layoutX="70.0" layoutY="59.0" />
                                  </children>

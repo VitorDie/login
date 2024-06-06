@@ -1,9 +1,16 @@
 package br.edu.fesa.teladelogin;
 
+import br.edu.fesa.teladelogin.comandaData.ComandaDTO;
+import br.edu.fesa.teladelogin.comandaData.ComandaModel;
+import br.edu.fesa.teladelogin.funcionarioData.FuncionarioDTO;
+import br.edu.fesa.teladelogin.funcionarioData.FuncionarioModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -11,6 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -72,7 +81,7 @@ public class DashboardController implements Initializable {
     private TextField agenda_servico;
 
     @FXML
-    private TableView<?> agenda_tableView;
+    private TableView<ComandaModelModificada> agenda_tableView;
 
     @FXML
     private Button agenda_updateBtn;
@@ -144,7 +153,7 @@ public class DashboardController implements Initializable {
     private TextField funcionarios_nome;
 
     @FXML
-    private TableView<?> funcionarios_tableView;
+    private TableView<FuncionarioModel> funcionarios_tableView;
 
     @FXML
     private Button funcionarios_updateBtn;
@@ -180,6 +189,9 @@ public class DashboardController implements Initializable {
         dashboard_qtdClientes_imageView.setImage(brandingImage);
         dashboard_qtdFuncionarios_imageView.setImage(brandingImage);
         dashboard_receita_imgView.setImage(brandingImage);
+
+        listarFuncionarios();
+        listarComandas();
     }
 
     public void showDashboard() {
@@ -198,5 +210,150 @@ public class DashboardController implements Initializable {
         dashboard_form.setVisible(false);
         agenda_form.setVisible(false);
         funcionarios_form.setVisible(true);
+    }
+
+    // Funcionario Form
+
+    private FuncionarioDTO funcionarioDTO = new FuncionarioDTO();
+    private ObservableList<FuncionarioModel> funcionariosListData;
+
+    private ObservableList<FuncionarioModel> funcionariosDataList() {
+        ArrayList<FuncionarioModel> listaFuncionarios = funcionarioDTO.read();
+        ObservableList<FuncionarioModel> listData = FXCollections.observableArrayList();
+
+        for (FuncionarioModel f : listaFuncionarios) {
+            listData.add(f);
+        }
+
+        return listData;
+    }
+
+    public void listarFuncionarios() {
+        funcionariosListData = funcionariosDataList();
+
+        funcionarios_col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        funcionarios_col_nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+
+        funcionarios_tableView.setItems(funcionariosListData);
+    }
+
+    public void adicionarFuncionario() {
+        funcionarioDTO.create(Integer.parseInt(fucnionarios_id.getText()), funcionarios_nome.getText());
+    }
+
+    public void atualizarFuncionario() {
+        funcionarioDTO.update(Integer.parseInt(fucnionarios_id.getText()), funcionarios_nome.getText());
+    }
+
+    public void deletarFuncionario() {
+        funcionarioDTO.delete(Integer.parseInt(fucnionarios_id.getText()));
+    }
+
+    public void clearFuncionario() {
+        listarFuncionarios();
+    }
+
+    // Comanda Form
+    private ComandaDTO comandaDTO = new ComandaDTO();
+    private ObservableList<ComandaModelModificada> comandaListData;
+
+    public class ComandaModelModificada {
+        private Integer id;
+        private String data;
+        private String cliente;
+        private String profissional;
+        private String servico;
+        private String pagamento;
+
+        public ComandaModelModificada(Integer id, LocalDateTime data, String cliente, String profissional, String servico, String pagamento) {
+            this.id = id;
+            this.data = String.valueOf(data);
+            this.cliente = cliente;
+            this.profissional = profissional;
+            this.servico = servico;
+            this.pagamento = pagamento;
+        }
+
+        public String getPagamento() {
+            return pagamento;
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public String getData() {
+            return data;
+        }
+
+        public String getCliente() {
+            return cliente;
+        }
+
+        public String getProfissional() {
+            return profissional;
+        }
+
+        public String getServico() {
+            return servico;
+        }
+    }
+
+    public ComandaModelModificada CmToComandaModificada(ComandaModel cm) {
+        return new ComandaModelModificada(cm.getId(), cm.getData_comanda(), cm.getCliente(), cm.getProfissional(), cm.getServico(), cm.getPagamento());
+    }
+
+    private ObservableList<ComandaModelModificada> comandaDataList() {
+        ArrayList<ComandaModel> listaComadas = comandaDTO.read();
+        ObservableList<ComandaModelModificada> listData = FXCollections.observableArrayList();
+
+        for (ComandaModel c : listaComadas) {
+            listData.add(CmToComandaModificada(c));
+        }
+
+        return listData;
+    }
+
+    public void listarComandas() {
+        comandaListData = comandaDataList();
+
+        agenda_col_id.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        agenda_col_data.setCellValueFactory(new PropertyValueFactory<>("Data"));
+        agenda_col_cliente.setCellValueFactory(new PropertyValueFactory<>("Cliente"));
+        agenda_col_profissional.setCellValueFactory(new PropertyValueFactory<>("Profissional"));
+        agenda_col_servico.setCellValueFactory(new PropertyValueFactory<>("Servico"));
+        agenda_col_pagamento.setCellValueFactory(new PropertyValueFactory<>("Pagamento"));
+
+        agenda_tableView.setItems(comandaListData);
+    }
+
+    public void criarComanda() {
+        Integer id = Integer.parseInt(agenda_id.getText());
+        LocalDateTime dt = agenda_data.getValue().atStartOfDay();
+        String cliente = agenda_cliente.getText();
+        String profissional = agenda_profissional.getText();
+        String servico = agenda_servico.getText();
+        String pagamento = agenda_pagamento.getText();
+        Double valor = Double.valueOf(agenda_valor.getText());
+
+        comandaDTO.create(id, dt, cliente, profissional, servico, pagamento, valor);
+    }
+
+    public void excluirComanda() {
+        Integer id = Integer.parseInt(agenda_id.getText());
+
+        comandaDTO.delete(id);
+    }
+
+    public void alterarComanda() {
+        Integer id = Integer.parseInt(agenda_id.getText());
+        LocalDateTime dt = agenda_data.getValue().atStartOfDay();
+        String cliente = agenda_cliente.getText();
+        String profissional = agenda_profissional.getText();
+        String servico = agenda_servico.getText();
+        String pagamento = agenda_pagamento.getText();
+        Double valor = Double.valueOf(agenda_valor.getText());
+
+        comandaDTO.update(id, dt, cliente, profissional, servico, pagamento, valor);
     }
 }
